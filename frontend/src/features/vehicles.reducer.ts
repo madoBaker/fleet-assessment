@@ -52,13 +52,12 @@ const vehiclesSlice = createSlice({
                 delete state.vehicles[index];
             })
             .addCase(fetchVehicleById.fulfilled, (state, action) => {
-                const index = state.vehicles.findIndex(vehicle => vehicle._id === action.payload[0]._id);
+                const index = state.vehicles.findIndex(vehicle => vehicle._id === action.payload._id);
                 if (index !== -1) {
                     // Replace the old vehicle data with the updated one
-                    state.vehicles[index] = action.payload[0];
+                    state.vehicles[index] = action.payload;
                 } else {
-                    // Optionally handle the case where the vehicle isn't found, maybe add it to the list
-                    state.vehicles.push(action.payload[0]);
+                    return;
                 }
             });
     },
